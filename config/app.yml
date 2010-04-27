@@ -1,0 +1,19 @@
+all:
+  content_filter:
+    parser_class:    sfContentFilterParser
+
+    filters:
+      url:
+        class:      sfContentFilterUrl
+        cache:      true
+        options:
+          nofollow: false
+
+    input_types:
+      default:    [line_break, url, html_filter]
+
+    cache:
+      enabled:  true
+      class:    sfFileCache
+      options:
+        cache_dir:  <?php echo sfConfig::get('sf_app_cache_dir') ?>/content_filter

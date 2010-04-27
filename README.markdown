@@ -78,7 +78,7 @@ and consists of the following options:
  * class
 
    This is the class that will perform the filtering. This class will
-   extend `sfContentFilter`. Read below for more information on creating
+   extend `sfContentFilterAbstract`. Read below for more information on creating
    custom filters.
 
  * cache
@@ -129,7 +129,7 @@ directory and place it in there.
 
     // lib/filter/sfContentFilterItalicize.class.php
     
-    class sfContentFilterItalicize extends sfContentFilter
+    class sfContentFilterItalicize extends sfContentFilterAbstract
     {
       public function filter($content)
       {
@@ -166,6 +166,6 @@ To enable caching, define the cache driver in `app.yml`:
           enabled:  true
           class:    sfFileCache
           options:
-            cache_dir:  <?php echo sfConfig::get('sf_app_cache_dir') ?>/inline_objects
+            cache_dir:  <?php echo sfConfig::get('sf_app_cache_dir') ?>/content_filter
 
 Now, each filter with the `cache` key set to true will be cached automatically.
