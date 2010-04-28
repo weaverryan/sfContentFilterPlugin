@@ -5,8 +5,8 @@
  * 
  * This uses the singleton pattern (perhaps regrettably).
  * 
- * @package     
- * @subpackage  
+ * @package     sfContentFilterPlugin
+ * @subpackage  parser
  * @author      Ryan Weaver <ryan@thatsquality.com>
  */
 
