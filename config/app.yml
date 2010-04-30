@@ -12,6 +12,11 @@ all:
         class:      sfContentFilterLineBreak
         cache:      true
         options:    []
+      markdown:
+        class:      sfContentFilterMarkdown
+        cache:      true
+        options:
+          styled_boxes: [quote, tip, caution, note]
 
     input_types:
       default:    [line_break, url, html_filter]
