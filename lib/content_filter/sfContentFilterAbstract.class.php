@@ -8,7 +8,7 @@
  * @author      Ryan Weaver <ryan@thatsquality.com>
  */
 
-class sfContentFilterAbstract
+abstract class sfContentFilterAbstract
 {
   protected $_options;
 
@@ -21,6 +21,17 @@ class sfContentFilterAbstract
   }
 
   /**
+   * Internal function defined by each filter.
+   * 
+   * Performs the actual filtering of the content
+   * 
+   * @param string $content The raw content that will be processed
+   * 
+   * @return string
+   */
+  abstract protected function _doFilter($content);
+
+  /**
    * Performs the actual filtering on the given content
    * 
    * @param string $content The raw content that will be processed
@@ -31,17 +42,6 @@ class sfContentFilterAbstract
   {
     return $this->_doFilter($content);
   }
-
-  /**
-   * Internal function defined by each filter.
-   * 
-   * Performs the actual filtering of the content
-   * 
-   * @param string $content The raw content that will be processed
-   * 
-   * @return string
-   */
-  abstract protected function _doFilter($content);
 
   /**
    * Returns the array of options
