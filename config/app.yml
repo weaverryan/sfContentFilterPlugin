@@ -7,7 +7,7 @@ all:
         class:      sfContentFilterUrl
         cache:      true
         options:
-          nofollow: false
+          max_text_length: 72            # Urls longer than this will have their text shortened (but the url will still stay the same)
 
     input_types:
       default:    [line_break, url, html_filter]
