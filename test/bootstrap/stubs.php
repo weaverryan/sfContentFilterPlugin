@@ -8,5 +8,5 @@ $stubs = array(
 
 foreach ($stubs as $stub)
 {
-  require_once dirname(__FILE__).'/../unit/content_filter/'.$stub.'.class.php';
+  require_once dirname(__FILE__).'/../stubs/'.$stub.'.class.php';
 }
