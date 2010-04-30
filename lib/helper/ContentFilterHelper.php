@@ -9,7 +9,7 @@
  */
 
 /**
- * Filters the given content based on the given inputType
+ * Filters the given content based on the given inputType or array of filters
  * 
  * The inputType represents an ordered collection of filters. The content
  * will be run through those filters and the returned
@@ -18,12 +18,12 @@
  * filter_content('My content', 'default');
  * 
  * @param string $content   The raw content that will be filtered
- * @param string $inputType The name of the input type for this content
+ * @param mixed $filters Either an array of filters or the name of an "input type"
  */
-function filter_content($content, $inputType)
+function filter_content($content, $filters)
 {
   return sfApplicationConfiguration::getActive()
     ->getPluginConfiguration('sfContentFilterPlugin')
     ->getParser()
-    ->filter($content, $inputType);
+    ->filter($content, $filters);
 }
