@@ -1,32 +1,24 @@
 sfContentFilterPlugin
 =====================
 
-Simple plugin to apply an group of filters to raw content. For example,
-filters might include:
+Simple plugin to apply an group of filters to raw content. The following
+filters are included in this plugin
 
- * HTML filter
-
-   The removal of all non-whitelisted HTML tags
-
- * Markdown
+ * Markdown (markdown)
 
    Conversion from Markdown to HTML
 
- * InlineObject
+ * InlineObject (inline_object)
 
-   Parsing of inline objects. See [sfInlineObjectPlugin](http://github.com/weaverryan/sfInlineObjectPlugin)
+   Parsing of inline objects. Requires [sfInlineObjectPlugin](http://github.com/weaverryan/sfInlineObjectPlugin)
 
- * Line breaks
+ * Line breaks (line_break)
 
    Conversion of carriage returns into actual html breaks &lt;br/&gt;
 
- * Url filter
+ * Url filter (url)
 
    Change all urls into actual links
-
- * Smileys
-
-   Convert text smileys into image smileys
 
 
 Usage
