@@ -172,3 +172,16 @@ To enable caching, define the cache driver in `app.yml`:
             cache_dir:  <?php echo sfConfig::get('sf_app_cache_dir') ?>/content_filter
 
 Now, each filter with the `cache` key set to true will be cached automatically.
+
+The Fine Details
+----------------
+
+This plugin was written for and inspired by
+[sympal CMF](http://www.sympalphp.org) and was developed by both Ryan Weaver
+and Jon Wage.
+
+Much of this plugin uses filters that were originally taken from Drupal,
+because why reinvent what works?
+
+If you have questions, comments or anything else, email me at ryan [at] thatsquality.com
+
