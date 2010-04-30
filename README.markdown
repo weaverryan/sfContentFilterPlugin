@@ -33,18 +33,22 @@ Usage
 -----
 
 This plugin comes packaged with several `filters` and more can be easily
-added. These filters are grouped into `input types`, which are ordered
-collections of filters. By default, this plugin comes packaged with an
-`input type` called `default`, which consists of the following filters:
+added.
 
- * Line breaks
- * Url filter
- * HTML filter
+Using the plugin couldn't be easier. To filter a piece of content, simply
+use the `filter_content()` helper. The first argument is the text to
+filter and the second argument is the name of the filter, or the array
+of filters to filter with:
 
-With that in mind, using the plugin couldn't be easier. To filter a piece
-of content, simply use the `filter_content()` helper. The first argument
-is the text to filter and the second argument is the `input type` with
-which to filter:
+    $text = 'Visit: www.sympalphp.org.';
+
+    echo filter_content($content, 'url');
+
+    Visit:<br/><a href="http://www.sympalphp.org" title="www.sympalphp.org">www.sympalphp.org</a>.
+
+Optionally, you may also configure filter by a configured `input type`, which
+is simply an ordered list of filters. For example, suppose the input type
+`default` will apply the `line_break` and `url` filters:
 
     $text = 'Visit:
     http://www.sympalphp.org.';
@@ -53,8 +57,8 @@ which to filter:
 
     Visit:<br/><a href="http://www.sympalphp.org" title="http://www.sympalphp.org">http://www.sympalphp.org</a>.
 
-Notice how the line break filter converted a line break into a &lt;br/&gt;
-tag and the url filter converted a url into a full link.
+Notice how the `line_break` filter converted a line break into a &lt;br/&gt;
+tag and the `url` filter converted a url into a full link.
 
 Configuration
 -------------
@@ -70,7 +74,7 @@ Defining and customizing a filter is easy, and is done in an `app.yml` file:
             class:      sfContentFilterUrl
             cache:      true
             options:
-              nofollow: false
+              max_text_length: 72
 
 All filter configuration is done beneath the `filters` key as seen above
 and consists of the following options:
@@ -128,10 +132,9 @@ be placed anywhere, but I recommend that you create a `lib/content_filter`
 directory and place it in there.
 
     // lib/filter/sfContentFilterItalicize.class.php
-    
     class sfContentFilterItalicize extends sfContentFilterAbstract
     {
-      public function filter($content)
+      public function _doFilter($content)
       {
         $words = $this->getOption('words');
         
@@ -147,7 +150,7 @@ directory and place it in there.
 That's it! Now when you filter with the `default` input type, the words
 `symfony`, `sympal`, `drupal` and `sfContentFilterPlugin` will all be italicized:
 
-    echo filter_content('sfContentFilterPlugin is built in symfony and was inspired by sympal and drupal.');
+    echo filter_content('sfContentFilterPlugin is built in symfony and was inspired by sympal and drupal.', 'default');
 
     <i>sfContentFilterPlugin</i> is built in <i>symfony</i> and was inspired by <i>sympal</i> and <i>drupal</i>.
 
