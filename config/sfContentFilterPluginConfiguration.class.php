@@ -44,7 +44,7 @@ class sfContentFilterPluginConfiguration extends sfPluginConfiguration
   {
     if ($this->_parser === null)
     {
-      $this->_parser = sfContentFilterParser::getInstance();
+      $this->_parser = sfContentFilterParser::createInstance();
     }
     
     return $this->_parser;

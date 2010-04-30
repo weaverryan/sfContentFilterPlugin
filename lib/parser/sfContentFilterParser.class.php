@@ -322,7 +322,7 @@ class sfContentFilterParser
    * 
    * @return sfContentFilterParser
    */
-  public static function getInstance()
+  public static function createInstance()
   {
     $class = sfConfig::get('app_content_filter_parser_class', 'sfContentFilterParser');
 

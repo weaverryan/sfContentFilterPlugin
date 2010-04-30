@@ -155,7 +155,7 @@ $t->is($result, 'testtotally different', 'The mutated cache is used');
 $t->info('5 - Test the static bootstrap method');
 require dirname(__FILE__).'/../../bootstrap/functional.php';
 
-$parser = sfContentFilterParser::getInstance();
+$parser = sfContentFilterParser::createInstance();
 $t->is(get_class($parser), 'sfContentFilterTestParser', 'The class is sfContentFilterTestParser');
 $t->is($parser->getInputType('upper_substring'), array('upper', 'substring'), '->getInputType() returns a config input type');
 $t->is($parser->getFilterConfig('upper', 'class'), 'sfContentFilterUpperStub', '->getFilterConfig returns a valid value.');
