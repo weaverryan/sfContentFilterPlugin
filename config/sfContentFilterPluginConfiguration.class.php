@@ -40,29 +40,11 @@ class sfContentFilterPluginConfiguration extends sfPluginConfiguration
    * 
    * @param string $class The name of the class to use for the parser
    */
-  public function getParser($class = null)
+  public function getParser()
   {
     if ($this->_parser === null)
     {
-      if ($class === null)
-      {
-        $class = sfConfig::get('app_content_filter_parser_class', 'sfContentFilterParser');
-      }
-
-      $filters = sfConfig::get('app_content_filter_filters', array());
-      $inputTypes = sfConfig::get('app_content_filter_input_types', array());
-      $this->_parser = new $class($filters, $inputTypes);
-
-      // Set the cache driver if caching is enabled
-      $cacheConfig = sfConfig::get('app_content_filter_cache');
-      if ($cacheConfig['enabled'])
-      {
-        $class = $cacheConfig['class'];
-        $options = isset($cacheConfig['options']) ? $cacheConfig['options'] : array();
-        
-        $cacheDriver = new $class($options);
-        $this->_parser->setCacheDriver($cacheDriver);
-      }
+      $this->_parser = sfContentFilterParser::getInstance();
     }
     
     return $this->_parser;

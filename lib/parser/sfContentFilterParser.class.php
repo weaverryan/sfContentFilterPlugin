@@ -314,4 +314,33 @@ class sfContentFilterParser
     }
   }
 
+  /**
+   * This is not a singleton accessor, but rather a place to house the logic
+   * for this class to bootstrap itself based on the application configuration
+   * 
+   * A better way to retrieve this class would be the sfContentFilterPluginConfiguration
+   * 
+   * @return sfContentFilterParser
+   */
+  public static function getInstance()
+  {
+    $class = sfConfig::get('app_content_filter_parser_class', 'sfContentFilterParser');
+
+    $filters = sfConfig::get('app_content_filter_filters', array());
+    $inputTypes = sfConfig::get('app_content_filter_input_types', array());
+    $parser = new $class($filters, $inputTypes);
+
+    // Set the cache driver if caching is enabled
+    $cacheConfig = sfConfig::get('app_content_filter_cache');
+    if ($cacheConfig['enabled'])
+    {
+      $class = $cacheConfig['class'];
+      $options = isset($cacheConfig['options']) ? $cacheConfig['options'] : array();
+      
+      $cacheDriver = new $class($options);
+      $parser->setCacheDriver($cacheDriver);
+    }
+    
+    return $parser;
+  }
 }

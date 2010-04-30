@@ -1,0 +1,30 @@
+Blog:
+  columns:
+    title:    string(255)
+    body:     clob
+  relations:
+    Products:
+      class: Product
+      refClass: BlogProduct
+      local: blog_id
+      foreign: product_id
+  actAs:
+    sfInlineObjectContainerTemplate:
+      relations:    [Products]
+
+Product:
+  columns:
+    title:    string(255)
+    price:    double
+  actAs:
+    Sluggable:
+      fields: [title]
+
+BlogProduct:
+  columns:
+    blog_id:
+      type:     integer
+      primary:  true
+    product_id:
+      type:     integer
+      primary:  true

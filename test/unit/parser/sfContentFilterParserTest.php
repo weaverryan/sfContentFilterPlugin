@@ -3,7 +3,7 @@
 require dirname(__FILE__).'/../../bootstrap/unit.php';
 require dirname(__FILE__).'/../../bootstrap/stubs.php';
 
-$t = new lime_test(25);
+$t = new lime_test(29);
 
 
 $t->info('1 - Test basics of setting filters, setting cache, etc');
@@ -150,3 +150,13 @@ $t->info('  4.3 - Mutate the cache and re-filter');
 $cache->set($key, 'totally different');
 $result = $parser->filter($testContent, array('substring', 'upper', 'option'));
 $t->is($result, 'testtotally different', 'The mutated cache is used');
+
+
+$t->info('5 - Test the static bootstrap method');
+require dirname(__FILE__).'/../../bootstrap/functional.php';
+
+$parser = sfContentFilterParser::getInstance();
+$t->is(get_class($parser), 'sfContentFilterTestParser', 'The class is sfContentFilterTestParser');
+$t->is($parser->getInputType('upper_substring'), array('upper', 'substring'), '->getInputType() returns a config input type');
+$t->is($parser->getFilterConfig('upper', 'class'), 'sfContentFilterUpperStub', '->getFilterConfig returns a valid value.');
+$t->is(get_class($parser->getCacheDriver()), 'sfFileCache', 'The cache is set correctly');

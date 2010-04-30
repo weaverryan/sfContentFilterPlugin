@@ -1,0 +1,24 @@
+all:
+  content_filter:
+    parser_class:    sfContentFilterTestParser
+
+    filters:
+      upper:
+        class:      sfContentFilterUpperStub
+        cache:      true
+      substring:
+        class:      sfContentFilterSubstringStub
+        cache:      true
+        options:
+          length:   7
+        
+
+    input_types:
+      default:    [line_break, url, html_filter]
+      upper_substring: [upper, substring]
+
+    cache:
+      enabled:  true
+      class:    sfFileCache
+      options:
+        cache_dir:  <?php echo sfConfig::get('sf_app_cache_dir') ?>/content_filter
