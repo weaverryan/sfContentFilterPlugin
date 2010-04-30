@@ -20,6 +20,28 @@ filters are included in this plugin
 
    Change all urls into actual links
 
+Installation
+------------
+
+With git:
+
+    git submodule add git://github.com/weaverryan/sfContentFilterPlugin.git plugins/sfContentFilterPlugin
+    git submodule init
+    git submodule update
+
+With subversion
+
+    svn propedit svn:externals plugins
+    
+    // In the editor, add the following entry and then save
+    sfContentFilterPlugin https://svn.github.com/weaverryan/sfContentFilterPlugin.git
+    
+    svn up
+
+In your `config/ProjectConfiguration.class.php` file, make sure you have
+the plugin enabled.
+
+    $this->enableAllPluginsExcept('sfPropelPlugin');
 
 Usage
 -----
