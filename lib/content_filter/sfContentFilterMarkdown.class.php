@@ -21,7 +21,7 @@ class sfContentFilterMarkdown extends sfContentFilterAbstract
   {
     require_once dirname(__FILE__).'/../vendor/markdown/markdown.php';
 
-    return '<div class="sympal_markdown">'.$this->_enhanceHtml(Markdown($content)).'</div>';
+    return '<div class="markdown">'.$this->_enhanceHtml(Markdown($content)).'</div>';
   }
 
   /**
