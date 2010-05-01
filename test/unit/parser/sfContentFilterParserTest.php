@@ -48,6 +48,10 @@ $testContent = 'The things you own end up owning you.';
 $testToUpper = 'THE THINGS YOU OWN END UP OWNING YOU.';
 
 $parser = new sfContentFilterParser();
+
+$t->info('2.1 - Parse with no filters, make sure nothing is done');
+$parser->filter('test', array(), 'test');
+
 $parser->setFilter('upper', 'sfContentFilterUpperStub', true, array());
 $parser->setFilter('substring', 'sfContentFilterSubstringStub', true, array('length' => 7));
 
@@ -55,13 +59,13 @@ $parser->setInputType('just_upper', array('upper'));
 $parser->setInputType('all', array('upper', 'substring'));
 $parser->setInputType('error', array('upper', 'fake'));
 
-$t->info('  2.1 - Run an input type that applies only the upper filter');
+$t->info('  2.2 - Run an input type that applies only the upper filter');
 $t->is($parser->filter($testContent, 'just_upper'), $testToUpper);
 
-$t->info('  2.2 - Run an input type that applies both filters');
+$t->info('  2.3 - Run an input type that applies both filters');
 $t->is($parser->filter($testContent, 'all'), 'THE THI');
 
-$t->info('  2.3 - Run an input type with an invalid filter, throws an exception');
+$t->info('  2.4 - Run an input type with an invalid filter, throws an exception');
 try
 {
   $parser->filter($testContent, 'error');
@@ -72,7 +76,7 @@ catch (sfException $e)
   $t->pass($e->getMessage());
 }
 
-$t->info('  2.4 - Try running the parser by passing it filters');
+$t->info('  2.5 - Try running the parser by passing it filters');
 $t->is($parser->filter($testContent, array('upper')), $testToUpper);
 $t->is($parser->filter($testContent, 'upper'), $testToUpper);
 

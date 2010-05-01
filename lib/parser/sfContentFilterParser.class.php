@@ -158,6 +158,12 @@ class sfContentFilterParser
       }
     }
 
+    // if we have no filters, simply return an empty string
+    if (count($filtersList) == 0)
+    {
+      return array();
+    }
+
     $filters = array();
     $i = 0;           // keeps track of what group we're on
     $cacheGroup = null; // Stores the cache key. If false, we're in a non-cache group. If null, we're in a new group
