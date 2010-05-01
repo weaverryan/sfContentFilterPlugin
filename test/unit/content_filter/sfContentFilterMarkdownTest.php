@@ -28,7 +28,7 @@ $markdown = "
         username: string(255)
 ";
 
-$html = '<div class="sympal_markdown"><blockquote class="tip"><p>
+$html = '<div class="markdown"><blockquote class="tip"><p>
   Testing tip</p>
 </blockquote>
 
