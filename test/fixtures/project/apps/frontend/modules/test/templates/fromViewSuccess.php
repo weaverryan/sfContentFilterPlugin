@@ -1,0 +1,1 @@
+<?php echo filter_content($phrase, array('url', 'markdown')) ?>

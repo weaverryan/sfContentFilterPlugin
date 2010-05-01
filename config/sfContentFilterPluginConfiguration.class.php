@@ -17,6 +17,10 @@ class sfContentFilterPluginConfiguration extends sfPluginConfiguration
   public function initialize()
   {
     $this->dispatcher->connect('context.load_factories', array($this, 'bootstrap'));
+
+    // Listener so we can "extend" the actions class
+    $action = new sfContentFilterAction();
+    $this->dispatcher->connect('component.method_not_found', array($action, 'listenComponentMethodNotFound'));
   }
 
   /**
