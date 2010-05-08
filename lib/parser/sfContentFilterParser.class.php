@@ -164,7 +164,8 @@ class sfContentFilterParser
       return array();
     }
 
-    $filters = array();
+    // create the filters array, ready to start loading the first group
+    $filters = array(0 => array('filters' => array(), 'cache' => false));
     $i = 0;           // keeps track of what group we're on
     $cacheGroup = null; // Stores the cache key. If false, we're in a non-cache group. If null, we're in a new group
     foreach ($filtersList as $filter)

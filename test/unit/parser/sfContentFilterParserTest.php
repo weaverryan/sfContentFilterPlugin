@@ -3,7 +3,7 @@
 require dirname(__FILE__).'/../../bootstrap/unit.php';
 require dirname(__FILE__).'/../../bootstrap/stubs.php';
 
-$t = new lime_test(29);
+$t = new lime_test(30);
 
 
 $t->info('1 - Test basics of setting filters, setting cache, etc');
@@ -154,6 +154,10 @@ $t->info('  4.3 - Mutate the cache and re-filter');
 $cache->set($key, 'totally different');
 $result = $parser->filter($testContent, array('substring', 'upper', 'option'));
 $t->is($result, 'testtotally different', 'The mutated cache is used');
+
+$t->info('  4.4 - Test JUST a non-cacheable filter'); // addresses a bug with the filterGroups
+$result = $parser->filter($testContent, array('option'));
+$t->is($result, 'test'.$testContent, 'The parser has no problem parsing just one, non-cached filter.');
 
 
 $t->info('5 - Test the static bootstrap method');
