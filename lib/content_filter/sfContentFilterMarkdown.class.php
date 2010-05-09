@@ -19,6 +19,12 @@ class sfContentFilterMarkdown extends sfContentFilterAbstract
    */
   protected function _doFilter($content)
   {
+    // skip procesing if there's nothing to process
+    if (!$content)
+    {
+      return $content;
+    }
+    
     require_once dirname(__FILE__).'/../vendor/markdown/markdown.php';
 
     return '<div class="markdown">'.$this->_enhanceHtml(Markdown($content)).'</div>';
