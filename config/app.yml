@@ -18,6 +18,14 @@ all:
         cache:      true
         options:
           styled_boxes: [quote, tip, caution, note]
+      twitter:
+        class:      sfContentFilterTwitter
+        cache:      true
+        options:
+          username_link_attributes:
+            class: twitter_username
+          hash_link_attributes:
+            class: twitter_hash
 
     input_types:
       default:    [line_break, url, html_filter]

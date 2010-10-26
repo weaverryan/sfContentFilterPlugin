@@ -20,6 +20,11 @@ filters are included in this plugin
 
    Change all urls into actual links
 
+ * Twitter filter (twitter)
+
+   Replaces `@weaverryan` type string to a link to that user's twitter page
+   and replaces `#hashtag` strings to a link to a search page for that hash. 
+
 Installation
 ------------
 
