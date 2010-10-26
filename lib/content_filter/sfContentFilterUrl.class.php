@@ -18,6 +18,12 @@ class sfContentFilterUrl extends sfContentFilterAbstract
    */
   public function _doFilter($content)
   {
+    // we cheat and use the core Tag helper
+    sfApplicationConfiguration::getActive()->loadHelpers('Tag');
+
+    // fixing a bug where the link doesn't match if it's right at the very end
+    $content = $content.' ';
+
     $regex1 = "!(<p>|<li>|<br\s*/?>|[ \n\r\t\(])((http://|https://|ftp://|mailto:|smb://|afp://|file://|gopher://|news://|ssl://|sslv2://|sslv3://|tls://|tcp://|udp://)([a-zA-Z0-9@:%_+*~#?&=.,/;-]*[a-zA-Z0-9@:%_+*~#&=/;-]))([.,?]?)(?=(</p>|</li>|<br\s*/?>|[ \n\r\t\)]))!i";
     $regex2 = "!(<p>|<li>|<br\s*/?>|[ \n\r\t\(])([A-Za-z0-9._-]+@[A-Za-z0-9._+-]+\.[A-Za-z]{2,4})([.,?]?)(?=(</p>|</li>|<br\s*/?>|[ \n\r\t\)]))!i";
     $regex3 = "!(<p>|<li>|[ \n\r\t\(])(www\.[a-zA-Z0-9@:%_+*~#?&=.,/;-]*[a-zA-Z0-9@:%_+~#\&=/;-])([.,?]?)(?=(</p>|</li>|<br\s*/?>|[ \n\r\t\)]))!i";
@@ -27,6 +33,7 @@ class sfContentFilterUrl extends sfContentFilterAbstract
     $content = preg_replace($regex2, '\1<a href="mailto:\2">\2</a>\3', $content);
     $content = preg_replace_callback($regex3, array($this, 'replace2'), $content);
 
+    $content = trim($content);
     
     return $content;
   }
