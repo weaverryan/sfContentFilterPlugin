@@ -43,7 +43,12 @@ class sfContentFilterUrl extends sfContentFilterAbstract
   {
     $caption = $this->_trim($match[2]);
 
-    return $match[1] . '<a href="'. $match[2] .'" title="'. $match[2] .'">'. $caption .'</a>'. $match[5];
+    $attributes = array_merge(array(
+      'href'  => $match[2],
+      'title' => $match[2],
+    ), $this->getOption('link_attributes', array()));
+
+    return $match[1].content_tag('a', $caption, $attributes).$match[5];
   }
 
   // transforms www-like urls into links
@@ -51,7 +56,12 @@ class sfContentFilterUrl extends sfContentFilterAbstract
   {
     $caption = $this->_trim($match[2]);
 
-    return $match[1] . '<a href="http://'. $match[2] .'" title="'. $match[2] .'">'. $caption .'</a>'. $match[3];
+    $attributes = array_merge(array(
+      'href'  => $match[2],
+      'title' => $match[2],
+    ), $this->getOption('link_attributes', array()));
+
+    return $match[1].content_tag('a', $caption, $attributes).$match[3];
   }
 
   /**
