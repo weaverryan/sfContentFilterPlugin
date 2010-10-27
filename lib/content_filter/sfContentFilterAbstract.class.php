@@ -65,4 +65,14 @@ abstract class sfContentFilterAbstract
   {
     return isset($this->_options[$name]) ? $this->_options[$name] : $default;
   }
+
+  /**
+   * @param  string $name The name of the option to set
+   * @param  mixed $value The value to set on the option
+   * @return void
+   */
+  public function setOption($name, $value)
+  {
+    $this->_options[$name] = $value;
+  }
 }
