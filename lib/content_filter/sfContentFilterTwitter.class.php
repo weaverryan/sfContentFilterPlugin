@@ -17,9 +17,6 @@ class sfContentFilterTwitter extends sfContentFilterAbstract
    */
   public function _doFilter($content)
   {
-    // we cheat and use the core Tag helper
-    sfApplicationConfiguration::getActive()->loadHelpers('Tag');
-
     $content = $this->processAtMessages($content);
     $content = $this->processHashTagMessages($content);
     
@@ -56,7 +53,7 @@ class sfContentFilterTwitter extends sfContentFilterAbstract
       'href'  => 'http://www.twitter.com/'.$twitterHandle,
     ), $this->getOption('username_link_attributes', array()));
 
-    return content_tag('a', $twitterHandle, $attributes);
+    return sfContentFilterUtil::contentTag('a', '@'.$twitterHandle, $attributes);
   }
 
   /**
@@ -89,6 +86,6 @@ class sfContentFilterTwitter extends sfContentFilterAbstract
       'href'  => 'http://search.twitter.com/search?q=%23'.$nakedHash,
     ), $this->getOption('hash_link_attributes', array()));
 
-    return content_tag('a', $nakedHash, $attributes);
+    return sfContentFilterUtil::contentTag('a', '#'.$nakedHash, $attributes);
   }
 }
