@@ -63,7 +63,7 @@ of filters to filter with:
 
     echo filter_content($content, 'url');
 
-    Visit:<br/><a href="http://www.sympalphp.org" title="www.sympalphp.org">www.sympalphp.org</a>.
+    Visit: <a href="http://www.sympalphp.org" title="www.sympalphp.org">www.sympalphp.org</a>.
 
 Optionally, you may also configure filter by a configured `input type`, which
 is simply an ordered list of filters. For example, suppose the input type
