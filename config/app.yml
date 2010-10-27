@@ -28,7 +28,7 @@ all:
             class: twitter_hash
 
     input_types:
-      default:    [line_break, url, html_filter]
+      default:    [line_break, url]
 
     cache:
       enabled:  true
