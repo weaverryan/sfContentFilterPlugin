@@ -18,9 +18,6 @@ class sfContentFilterUrl extends sfContentFilterAbstract
    */
   public function _doFilter($content)
   {
-    // we cheat and use the core Tag helper
-    sfApplicationConfiguration::getActive()->loadHelpers('Tag');
-
     // fixing a bug where the link doesn't match if it's right at the very end
     $content = $content.' ';
 
@@ -31,9 +28,12 @@ class sfContentFilterUrl extends sfContentFilterAbstract
     // Replace all types 
     $content = preg_replace_callback($regex1, array($this, 'replace1'), $content);
     $content = preg_replace($regex2, '\1<a href="mailto:\2">\2</a>\3', $content);
-    $content = preg_replace_callback($regex3, array($this, 'replace2'), $content);
+    $content = preg_replace_callback($regex3, array($this, 'replace3'), $content);
 
-    $content = trim($content);
+    if (substr($content, strlen($content) - 1, 1) == ' ')
+    {
+      $content = substr($content, 0, strlen($content) - 1);
+    }
     
     return $content;
   }
@@ -48,20 +48,20 @@ class sfContentFilterUrl extends sfContentFilterAbstract
       'title' => $match[2],
     ), $this->getOption('link_attributes', array()));
 
-    return $match[1].content_tag('a', $caption, $attributes).$match[5];
+    return $match[1].sfContentFilterUtil::contentTag('a', $caption, $attributes).$match[5];
   }
 
   // transforms www-like urls into links
-  public function replace2($match)
+  public function replace3($match)
   {
     $caption = $this->_trim($match[2]);
 
     $attributes = array_merge(array(
-      'href'  => $match[2],
+      'href'  => 'http://'.$match[2],
       'title' => $match[2],
     ), $this->getOption('link_attributes', array()));
 
-    return $match[1].content_tag('a', $caption, $attributes).$match[3];
+    return $match[1].sfContentFilterUtil::contentTag('a', $caption, $attributes).$match[3];
   }
 
   /**
